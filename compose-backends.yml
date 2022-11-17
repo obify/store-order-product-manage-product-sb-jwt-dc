@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  mysql_db:
+    image: "mysql:latest"
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: assignmentDB
+      MYSQL_USER: user
+      MYSQL_PASSWORD: dbpass
+      MYSQL_ROOT_PASSWORD: dbpass
+
+  api_service:
+    build: .
+    restart: always
+    ports:
+      - 8090:8090
+    depends_on:
+      - mysql_db
